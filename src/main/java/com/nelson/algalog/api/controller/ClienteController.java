@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nelson.algalog.domain.model.Cliente;
 
-@RestController
+@RestController 
 public class ClienteController {
 	@GetMapping("/clientes")
 	public List<Cliente> listar() {
 		
-		var cliente = new Cliente();
+		Cliente cliente = new Cliente();
 		cliente.setId(1);
 		cliente.setNome("Nelson");
 		cliente.setEmail("exemplo@exemplar.com");
