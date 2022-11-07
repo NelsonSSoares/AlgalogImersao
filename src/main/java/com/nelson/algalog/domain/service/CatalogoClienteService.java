@@ -16,6 +16,14 @@ public class CatalogoClienteService {
 	private ClienteRepository clienteRepository;
 	
 	
+	public Cliente buscar(Long clienteId) {
+		return clienteRepository.findById(clienteId).orElseThrow(()-> new NegocioException("Cliente Não encontrado!") );
+	}
+	
+	
+	
+	
+	
 	@Transactional // declara metodo deve ser executado dentro de uma transação ou seja algo que der errado todas as operações da transação no banco é descartado
 	public Cliente salvar(Cliente cliente) {
 				
@@ -34,5 +42,6 @@ public class CatalogoClienteService {
 	public void excluir(Long clienteId) {
 		clienteRepository.deleteById(clienteId);
 	}
+	
 	
 }
