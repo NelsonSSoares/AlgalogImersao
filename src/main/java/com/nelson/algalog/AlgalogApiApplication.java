@@ -11,3 +11,5 @@ public class AlgalogApiApplication {
 	}
 
 }
+
+/*REMOVER ALLARGSCONSTRUCTOR DO LOMBOK*/

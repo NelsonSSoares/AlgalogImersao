@@ -1,7 +1,7 @@
 package com.nelson.algalog.api.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -11,9 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.nelson.algalog.domain.ValidationGroups;
 
 import lombok.EqualsAndHashCode;
 
@@ -28,24 +33,29 @@ public class Entrega {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment
 	private Long id;
 	
-	@ManyToOne //cliente_id 
 	//@JoinColumn(name = "cliente_id)
+	@Valid
+	@ManyToOne //cliente_id 
+	@NotNull
+	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
 	private Cliente cliente;
 	
+	@Valid
+	@NotNull
 	@Embedded // mapeia outra classe para uma mesma tabela
 	private Destinatario destinatario;
 	
-	
+	@NotNull
 	private BigDecimal taxa;
 	
 	@Enumerated(EnumType.STRING)// armazena a string e nao o indice do Enum
 	private StatusEntrega status;
 	
 	@JsonProperty(access = Access.READ_ONLY) // somente leitura, impede que o usuario mande esta informação que gerada automaticamente 
-	private LocalDateTime dataPedido;
+	private OffsetDateTime dataPedido;
 	
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataFinalizacao;
+	private OffsetDateTime dataFinalizacao;
 	
 	
 	
@@ -81,16 +91,16 @@ public class Entrega {
 	public void setStatus(StatusEntrega status) {
 		this.status = status;
 	}
-	public LocalDateTime getDataPedido() {
+	public OffsetDateTime getDataPedido() {
 		return dataPedido;
 	}
-	public void setDataPedido(LocalDateTime dataPedido) {
+	public void setDataPedido(OffsetDateTime dataPedido) {
 		this.dataPedido = dataPedido;
 	}
-	public LocalDateTime getDataFinalizacao() {
+	public OffsetDateTime getDataFinalizacao() {
 		return dataFinalizacao;
 	}
-	public void setDataFinalizacao(LocalDateTime dataFinalizacao) {
+	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
 		this.dataFinalizacao = dataFinalizacao;
 	}
 	

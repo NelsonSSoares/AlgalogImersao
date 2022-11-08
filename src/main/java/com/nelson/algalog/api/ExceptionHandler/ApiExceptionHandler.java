@@ -1,6 +1,6 @@
 package com.nelson.algalog.api.ExceptionHandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		}
 		
 		problema.setStatus(status.value());
-		problema.setDate(LocalDateTime.now());
+		problema.setDate(OffsetDateTime.now());
 		problema.setTitulo("Um ou mais campos estão invalidos");
 		problema.setCampos(campos);
 		
@@ -65,7 +65,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		Problema problema = new Problema();
 		problema.setStatus(status.value());
-		problema.setDate(LocalDateTime.now());
+		problema.setDate(OffsetDateTime.now());
 		problema.setTitulo(ex.getMessage());
 		
 		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);

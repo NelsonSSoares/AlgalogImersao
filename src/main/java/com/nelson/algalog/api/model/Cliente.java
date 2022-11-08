@@ -6,7 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+
+import com.nelson.algalog.domain.ValidationGroups;
 
 import lombok.EqualsAndHashCode; //tambem disponivel no source->generate equals and hashCode
 
@@ -21,7 +25,7 @@ import lombok.EqualsAndHashCode; //tambem disponivel no source->generate equals 
 @Entity //CLASSE QUE REPRESENTA ENTIDADE
 public class Cliente {
 	
-	
+	@NotNull(groups = ValidationGroups.ClienteId.class)
 	@EqualsAndHashCode.Include //inclui na verificação de equals and hashCode
 	@Id // Id chave primaria
 	@GeneratedValue(strategy = GenerationType.IDENTITY)// autoincrement do mysql
