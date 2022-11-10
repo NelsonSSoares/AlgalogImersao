@@ -1,5 +1,7 @@
 package com.nelson.algalog.api.model;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,10 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 import com.nelson.algalog.domain.ValidationGroups;
-
-import lombok.EqualsAndHashCode; //tambem disponivel no source->generate equals and hashCode
 
 //import lombok.Getter;
 //import lombok.Setter;
@@ -21,12 +20,12 @@ import lombok.EqualsAndHashCode; //tambem disponivel no source->generate equals 
 //@Setter
 //@Table(name= "Cliente" )especifica o nome da tabela no banco de dados
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true) // compara objetos jaava no caso especificando o ID
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true) // compara objetos jaava no caso especificando o ID
 @Entity //CLASSE QUE REPRESENTA ENTIDADE
 public class Cliente {
 	
 	@NotNull(groups = ValidationGroups.ClienteId.class)
-	@EqualsAndHashCode.Include //inclui na verificação de equals and hashCode
+	//@EqualsAndHashCode.Include //inclui na verificação de equals and hashCode
 	@Id // Id chave primaria
 	@GeneratedValue(strategy = GenerationType.IDENTITY)// autoincrement do mysql
 	private Long id;
@@ -75,6 +74,22 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [id=" + id + ", name=" + name + ", email=" + email + ", telefone=" + telefone + "]";
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(id, other.id);
+	}
+	
 	
 	
 }

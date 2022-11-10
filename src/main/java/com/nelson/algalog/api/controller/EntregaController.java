@@ -21,17 +21,26 @@ import com.nelson.algalog.api.model.input.EntregaInput;
 import com.nelson.algalog.domain.repository.EntregaRepository;
 import com.nelson.algalog.domain.service.SolicitacaoEntregaService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
+//@AllArgsConstructor
 @RestController
 @RequestMapping("/entregas")
 public class EntregaController {
+	
 	
 	private EntregaRepository entregaRepository;
 	private EntregaAssembler entregaAssembler;
 	private SolicitacaoEntregaService solicitacaoEntregaService;
 	
+		
+	
+	public EntregaController(EntregaRepository entregaRepository, EntregaAssembler entregaAssembler,
+			SolicitacaoEntregaService solicitacaoEntregaService) {
+		super();
+		this.entregaRepository = entregaRepository;
+		this.entregaAssembler = entregaAssembler;
+		this.solicitacaoEntregaService = solicitacaoEntregaService;
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public EntregaModel solicitar(@Valid @RequestBody EntregaInput entregaInput) {

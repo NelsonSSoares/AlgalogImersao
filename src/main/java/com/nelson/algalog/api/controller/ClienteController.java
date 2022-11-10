@@ -22,14 +22,25 @@ import com.nelson.algalog.api.model.Cliente;
 import com.nelson.algalog.domain.repository.ClienteRepository;
 import com.nelson.algalog.domain.service.CatalogoClienteService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
+//@AllArgsConstructor
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 	
 	
+	
+	
+	
+	public ClienteController(ClienteRepository clienteRepository, CatalogoClienteService catalogoClienteService) {
+		super();
+		this.clienteRepository = clienteRepository;
+		this.catalogoClienteService = catalogoClienteService;
+	}
+
+
+
+
+
 	@Autowired //injeção de depedencia, procurada automaticamente pelo nome identico
 	private ClienteRepository clienteRepository;
 	private CatalogoClienteService catalogoClienteService;

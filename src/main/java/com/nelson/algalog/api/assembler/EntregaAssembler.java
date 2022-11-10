@@ -10,13 +10,18 @@ import com.nelson.algalog.api.model.Entrega;
 import com.nelson.algalog.api.model.EntregaModel;
 import com.nelson.algalog.api.model.input.EntregaInput;
 
-import lombok.AllArgsConstructor;
 
-
-@AllArgsConstructor
+//@AllArgsConstructor
 @Component
 public class EntregaAssembler {
 	
+	
+	
+	public EntregaAssembler(ModelMapper modelMapper) {
+		super();
+		this.modelMapper = modelMapper;
+	}
+
 	private ModelMapper modelMapper;
 	
 	public EntregaModel toModel(Entrega entrega) {
