@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,6 +20,7 @@ import com.nelson.algalog.api.model.Entrega;
 import com.nelson.algalog.api.model.EntregaModel;
 import com.nelson.algalog.api.model.input.EntregaInput;
 import com.nelson.algalog.domain.repository.EntregaRepository;
+import com.nelson.algalog.domain.service.FinalizacaoEntregaService;
 import com.nelson.algalog.domain.service.SolicitacaoEntregaService;
 
 //@AllArgsConstructor
@@ -30,7 +32,7 @@ public class EntregaController {
 	private EntregaRepository entregaRepository;
 	private EntregaAssembler entregaAssembler;
 	private SolicitacaoEntregaService solicitacaoEntregaService;
-	
+	private FinalizacaoEntregaService finalizacaoEntregaService;
 		
 	
 	public EntregaController(EntregaRepository entregaRepository, EntregaAssembler entregaAssembler,
@@ -65,6 +67,14 @@ public class EntregaController {
 					return ResponseEntity.ok(entregaAssembler.toModel(entrega));
 				})
 				.orElse(ResponseEntity.notFound().build());
+	}
+	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PutMapping("/{entredaId}/finalizacao")
+	public void finalizar(@PathVariable Long entregaId) {
+		
+		finalizacaoEntregaService.finalizar(entregaId);
+		
 	}
 	
 }

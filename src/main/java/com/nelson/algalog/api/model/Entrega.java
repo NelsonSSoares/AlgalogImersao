@@ -24,6 +24,7 @@ import javax.validation.groups.Default;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.nelson.algalog.domain.ValidationGroups;
+import com.nelson.algalog.domain.exception.NegocioException;
 
 //@Getter
 //@Setter
@@ -141,6 +142,22 @@ public class Entrega {
 		
 		return ocorrencia;
 	}
+	public void finalizar() {
+		
+		if(!podeSerFinalizada()) {
+			throw new NegocioException("Entrega não pode ser Finalizada");
+		}
+		
+		setStatus(StatusEntrega.FINALIZADA);
+		setDataFinalizacao(OffsetDateTime.now());
+		
+	}
+	
+	public boolean podeSerFinalizada() {
+		return StatusEntrega.PENDENTE.equals(getStatus());
+	}
+	
+
 	
 	
 	
